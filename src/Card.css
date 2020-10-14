@@ -20,8 +20,8 @@ td {
     padding: 5px 0;
 }
 
-tr:nth-child(2n -1) {
-    background-color: #ddd;
+tr:nth-child(2n -1).active, .active{
+    background-color: yellow;
 } 
 
 img {
@@ -34,3 +34,4 @@ img {
     height: 388px;
     background-color: green;
 }
+

@@ -6,7 +6,11 @@ import Car from './Car';
 
 const uncovered = false;
 
-export default function Card({ car, uncovered }) {
+export default function Card({ car, uncovered, onSelectProperty, selectedProperty }) {
+
+    function handleClick(event, prop) {
+        console.log(`${prop} clicked, ${event}`);
+    }
 
     Card.PropTypes = {
         uncovered: PropTypes.bool.isRequired,
@@ -29,7 +33,9 @@ export default function Card({ car, uncovered }) {
                     {Object.keys(Car.properties).map(property => {
                         const carProperty = Car.properties[property];
                         return (
-                            <tr key={property}>
+                            <tr key={property} 
+                            className = {selectedProperty === property ? 'active' : ''}
+                            onClick = {() => onSelectProperty(property)}>
                                 <td>{carProperty.label}</td>
                                 <td>
                                     {car[property]}&nbsp;
@@ -49,4 +55,11 @@ export default function Card({ car, uncovered }) {
     } else {
         return back;
     }
+
+    Card.propTypes = {
+        uncovered: PropTypes.bool.isRequired,
+        car: PropTypes.instanceOf(Car).isRequired,
+        onSelectProperty: PropTypes.func,
+        selectedProperty: PropTypes.string,
+    };
 }
